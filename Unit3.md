@@ -23,4 +23,4 @@ I did further reading on this topic and saw that my assumptions were also mirror
 
 References:
 
-Schober et al. (2019): Schober, P., Boer, C. and Schwarte, L.A., 2019. Correlation coefficients: appropriate use and interpretation. Anesthesia & Analgesia, 126(5), pp.1763-1768. Available at: https://www.nature.com/articles/s41598-019-57247-4 [Accessed 1 January 2025].
+Schober et al. (2019): Schober, P., Boer, C. and Schwarte, L.A., 2019. Correlation coefficients: appropriate use and interpretation. Anesthesia & Analgesia, 126(5), pp.1763-1768. Available at: https://www.nature.com/articles/s41598-019-57247-4 [Accessed 20 December 2024].
