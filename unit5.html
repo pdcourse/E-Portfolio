@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Unit 5: Jaccard Coefficient Calculations</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color: #f6f6ef;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p {
+            margin: 0 0 10px 0;
+            text-align: left;
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 400px;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .breadcrumb {
+            align-self: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .breadcrumb a:hover {
+            background-color: #e0e0e0;
+        }
+
+        .code-block, code {
+    width: 100%;
+    max-width: 400px;
+    background-color: #f8f9fa;  /* Light gray background */
+    border: 1px solid #e9ecef;  /* Lighter border color */
+    padding: 15px;
+    border-radius: 5px;
+    font-family: monospace;
+    overflow-x: auto;
+}
+
+        code {
+            padding: 0;
+            margin: 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        ul {
+            width: 100%;
+            padding-left: 20px;
+        }
+
+        h2 {
+            width: 100%;
+            margin: 0 0 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="breadcrumb">
+        <a href="index.html">Back to homepage</a>
+    </div>
+
+    <div class="container">
+        <h2>Unit 5: Jaccard Coefficient Calculations</h2>
+        
+<p>In Unit 5, I was given the following table which is used to calculate the Jaccard coefficients:</p>
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 600px; text-align: center;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Fever</th>
+            <th>Cough</th>
+            <th>Test-1</th>
+            <th>Test-2</th>
+            <th>Test-3</th>
+            <th>Test-4</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Jack</td>
+            <td>M</td>
+            <td>Y</td>
+            <td>N</td>
+            <td>P</td>
+            <td>N</td>
+            <td>N</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>Mary</td>
+            <td>F</td>
+            <td>Y</td>
+            <td>N</td>
+            <td>P</td>
+            <td>A</td>
+            <td>P</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>Jim</td>
+            <td>M</td>
+            <td>Y</td>
+            <td>P</td>
+            <td>N</td>
+            <td>N</td>
+            <td>N</td>
+            <td>A</td>
+        </tr>
+    </tbody>
+</table>
+<p>To calculate them, I have written this Python code:</p>
+<pre>
+<code># Define the test results for each person
+jack_tests = ['Y', 'N', 'P', 'N', 'N', 'A']
+mary_tests = ['Y', 'N', 'P', 'A', 'P', 'N']
+jim_tests = ['Y', 'P', 'N', 'N', 'N', 'A']
+
+# Function to calculate Jaccard coefficient
+def jaccard_coefficient(set1, set2):
+    # Exclude ambiguous results ('A') and calculate intersection and union
+    intersection = sum(1 for a, b in zip(set1, set2) if a == b and a != 'A')
+    union = sum(1 for a, b in zip(set1, set2) if a != 'A' or b != 'A')
+    # Return the Jaccard coefficient
+    return intersection / union if union > 0 else 0
+
+# Calculate Jaccard coefficients for each pair
+jaccard_jack_mary = jaccard_coefficient(jack_tests, mary_tests)
+jaccard_jack_jim = jaccard_coefficient(jack_tests, jim_tests)
+jaccard_jim_mary = jaccard_coefficient(jim_tests, mary_tests)
+</code>
+</pre>
+<p>The outcomes:</p>
+<ul>
+    <li>Jaccard coefficient (Jack, Mary): 0.500</li>
+    <li>Jaccard coefficient (Jack, Jim): 0.600</li>
+    <li>Jaccard coefficient (Jim, Mary): 0.167</li>
+</ul>
+<p>The Jaccard coefficient provides a numerical value to represent the similarity between two sets of data...</p>
+
+    </div>
+</body>
+</html>

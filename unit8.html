@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Unit 8: Gradient Cost Function</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color: #f6f6ef;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p {
+            margin: 0 0 10px 0;
+            text-align: left;
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 400px;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .breadcrumb {
+            align-self: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .breadcrumb a:hover {
+            background-color: #e0e0e0;
+        }
+
+        .code-block, code {
+    width: 100%;
+    max-width: 400px;
+    background-color: #f8f9fa;  /* Light gray background */
+    border: 1px solid #e9ecef;  /* Lighter border color */
+    padding: 15px;
+    border-radius: 5px;
+    font-family: monospace;
+    overflow-x: auto;
+}
+
+        code {
+            padding: 0;
+            margin: 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        ul {
+            width: 100%;
+            padding-left: 20px;
+        }
+
+        h2 {
+            width: 100%;
+            margin: 0 0 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="breadcrumb">
+        <a href="index.html">Back to homepage</a>
+    </div>
+
+    <div class="container">
+<h2>Unit 8: Gradient Cost Function</h2>
+
+<p>In the following Python code I attempted an implementation of gradient descent for fitting a linear regression model to a dataset.</p>
+
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+def gradient_descent(x, y):
+    m_curr = b_curr = 0  # Initialize slope and intercept
+    iterations = 100  # Number of updates
+    n = len(x)  # Number of data points
+    learning_rate = 0.08  # Step size for parameter updates
+    
+    # To store historical data for visualization
+    m_history = []
+    b_history = []
+    cost_history = []
+    
+    for i in range(iterations):
+        # Calculate predicted values based on current slope and intercept
+        y_predicted = m_curr * x + b_curr
+        
+        # Compute the cost function (mean squared error)
+        cost = (1/n) * sum((y - y_predicted) ** 2)
+        
+        # Calculate gradients for slope (m) and intercept (b)
+        md = -(2/n) * sum(x * (y - y_predicted))
+        bd = -(2/n) * sum(y - y_predicted)
+        
+        # Update parameters using the gradients
+        m_curr = m_curr - learning_rate * md
+        b_curr = b_curr - learning_rate * bd
+        
+        # Save progress for later visualization
+        m_history.append(m_curr)
+        b_history.append(b_curr)
+        cost_history.append(cost)
+    
+    return m_curr, b_curr, m_history, b_history, cost_history
+
+# Input data: x (independent variable) and y (dependent variable)
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([5, 7, 9, 11, 13])
+
+# Perform gradient descent
+m_final, b_final, m_history, b_history, cost_history = gradient_descent(x, y)
+
+# Visualization
+plt.figure(figsize=(14, 5))
+
+# Plot the data points and fitted line
+plt.subplot(1, 2, 1)
+plt.scatter(x, y, color='blue', label='Data points')
+plt.plot(x, m_final * x + b_final, color='red', label=f'Fitted line: y = {m_final:.2f}x + {b_final:.2f}')
+plt.title('Data and Fitted Line')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+
+# Plot cost function progression
+plt.subplot(1, 2, 2)
+plt.plot(range(len(cost_history)), cost_history, color='green')
+plt.title('Cost Function over Iterations')
+plt.xlabel('Iterations')
+plt.ylabel('Cost')
+
+plt.tight_layout()
+plt.show()</code></pre>
+
+<p>In this exercise I tried to understand the effects of changing parameter values during a gradient descent optimization process. The goal here was to fit a linear model to a set of 2D data points by minimizing a cost function using gradient descent.</p>
+
+<p>The number of iterations determines how often the parameters (slope and intercept) are updated. More iterations provide additional opportunities for convergence to the global minimum of the cost function. However if there are too few iterations, the model can not capture the underlying data structure which can cause underfitting. On the other hand, too many iterations can result in unnecessary computations, especially when the parameters have already converged.</p>
+
+<p>The learning rate parameter sets the step size during each update of the parameters. A Small learning rate results in gradual updates which provides a stable but slow convergence. Large learning rates speed up convergence by taking larger steps but this can lead to overshooting the minimum, which can potentially cause divergence or oscillations.</p>
+    </div>
+</body>
+</html>

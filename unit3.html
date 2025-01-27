@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Unit 3: Correlation and Regression</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            background-color: #f6f6ef;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p {
+            margin: 0 0 10px 0;
+            text-align: left;
+            width: 100%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 400px;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .breadcrumb {
+            align-self: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .breadcrumb a:hover {
+            background-color: #e0e0e0;
+        }
+
+        .code-block, code {
+    width: 100%;
+    max-width: 400px;
+    background-color: #f8f9fa;  /* Light gray background */
+    border: 1px solid #e9ecef;  /* Lighter border color */
+    padding: 15px;
+    border-radius: 5px;
+    font-family: monospace;
+    overflow-x: auto;
+}
+
+        code {
+            padding: 0;
+            margin: 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+        }
+
+        ul {
+            width: 100%;
+            padding-left: 20px;
+        }
+
+        h2 {
+            width: 100%;
+            margin: 0 0 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="breadcrumb">
+        <a href="index.html">Back to homepage</a>
+    </div>
+
+    <div class="container">
+        <h2>Unit 3: Correlation and Regression</h2>
+        
+        <p>For this unit, I looked at adding noise to see its effect on correlation specifically. In the provided example file "Unit03 Ex1 covariance_pearson_correlation.ipynb" I have changed the noise in the <code>data2</code> variable by adding a higher random generation.</p>
+        
+        <pre class="code-block">
+<code>data2 = data1 + (5 * randn(1000) + 20)   # Less noise
+data2 = data1 + (15 * randn(1000) + 70)  # More noise</code>
+        </pre>
+        
+        <p>For one run, the outcomes for "less noise" and "more noise" are these respectively:</p>
+        
+        <img src="unit3lessnoise.png" alt="Graph showing less noise" />
+        <img src="unit3morenoise.png" alt="Graph showing more noise" />
+        
+        <p>By changing the noise, we can see multiple effects in specific areas:</p>
+        
+        <ul>
+            <li><strong>Covariance:</strong> By adding more noise <code>data2</code> increases its variability, which can dilute the shared variance between <code>data1</code> and <code>data2</code>. This leads to a lower covariance value.</li>
+            <li><strong>Pearson's Correlation Coefficient:</strong> When noise is added to <code>data2</code>, the linear relationship weakens. This reduces the correlation coefficient. In extreme cases of noise, correlation could even approach zero if <code>data2</code> becomes dominated by random fluctuations.</li>
+            <li><strong>Plotting:</strong> In the scatter plot, adding noise causes the points to spread out further which causes the relationship between <code>data1</code> and <code>data2</code> to appear less structured.</li>
+        </ul>
+        
+        <p>These outcomes show that real-world data is subject to changes when one variable is influenced by random (or at least hard to control) factors such as measurement errors, environmental influence, etc. This noise can obscure true relationships which can make it more difficult to detect trends. High noise can hide observable correlation this way.</p>
+        
+        <p>I did further reading on this topic and saw that my assumptions were also mirrored in the literature. Schober et al. (2019) explain that all measurements inherently include a random error component (commonly referred to as noise or uncertainty). Unlike systematic errors, which are consistent and can often be corrected, random errors are unpredictable and vary with each measurement.</p>
+        
+        <p><strong>References:</strong></p>
+        
+        <p>Schober et al. (2019): Schober, P., Boer, C. and Schwarte, L.A., 2019. Correlation coefficients: appropriate use and interpretation. Anesthesia & Analgesia, 126(5), pp.1763-1768. Available at: <a href="https://www.nature.com/articles/s41598-019-57247-4">https://www.nature.com/articles/s41598-019-57247-4</a> [Accessed 20 December 2024].</p>
+    </div>
+</body>
+</html>
